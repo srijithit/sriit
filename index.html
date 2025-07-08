@@ -97,46 +97,27 @@
   </div><br>
   <p>Let's get in touch. Send me a message:</p>
 
-<form action="/action_page.php" target="_blank">
-    <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required="" name="Name"></p>
-    <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required="" name="Email"></p>
-    <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required="" name="Message"></p>
-    <p>
-      <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-        <a href="tk.html" class="button-class"> 
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-      </a></button><a href="tk.html" class="button-class">
-    </a></p><a href="tk.html" class="button-class">
-  
-<!-- End Contact Section -->
-</a></form>
+
+<form id="myForm">
+  <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
+  <p><input class="w3-input w3-padding-16" type="email" placeholder="Email" required name="email"></p>
+  <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
+  <p>
+    <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+      <i class="fa fa-paper-plane"></i> SEND MESSAGE
+    </button>
+  </p>
+</form>
+
 
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxQJ8yE-iVeFjMdAlf_cOv9yt30NlYB7W9mcH4Hch0e/dev';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxpPJra-Yjip-z7L_5PRzFO-0Yku-ScWZ5p99oYAx5w-oAzepPdKFmm4RwgykYHATOJvA/exec';
+  const form = document.getElementById('myForm');
 
-  document.getElementById('myForm').addEventListener('submit', function (e) {
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    const form = e.target;
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value
-    };
-
-    fetch(scriptURL, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => alert('Form Submitted Successfully'))
-      .catch(error => alert('Error!', error.message));
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => alert("Form submitted successfully!"))
+      .catch(error => alert("Error!", error.message));
   });
 </script>
-
-
-
-
-
-
